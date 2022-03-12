@@ -75,7 +75,7 @@ public class Game {
         initializeBoard();
 
         // Different Rotation for Insane Mode
-        if (score == 10 && !canvasTurned) {
+        if (score == 30 && !canvasTurned) {
             turnCanvas();
             canvasTurned = true;
         }
@@ -94,9 +94,9 @@ public class Game {
 
         // Set Action when Food is reached
         if (bigHead && foodX == Snake.snake.get(-0).x-1 && foodY == Snake.snake.get(0).y-1 ||
-                foodX == Snake.snake.get(-0).x && foodY == Snake.snake.get(0).y ||
-                foodX == Snake.snake.get(-0).x+1 && foodY == Snake.snake.get(0).y+1 ||
-                foodX == Snake.snake.get(-0).x+2 && foodY == Snake.snake.get(0).y+2) {
+                bigHead && foodX == Snake.snake.get(-0).x && foodY == Snake.snake.get(0).y ||
+                bigHead && foodX == Snake.snake.get(-0).x+1 && foodY == Snake.snake.get(0).y+1 ||
+                bigHead && foodX == Snake.snake.get(-0).x+2 && foodY == Snake.snake.get(0).y+2) {
 
             incrementSnake();
         }
@@ -105,8 +105,8 @@ public class Game {
             incrementSnake();
         }
 
-        // If Food isn't reached in 5 seconds
-        else if (timer.elapsedTime() > 5000) {
+        // If Food isn't reached in 8 seconds
+        else if (timer.elapsedTime() > 8000) {
             System.out.println(timer.elapsedTime());
             Food.addFood();
             timer.resetTimerToZero();
@@ -134,14 +134,23 @@ public class Game {
     }
 
     public void resetGame() {
+        direction = Direction.right;
         gameOver = false;
         bigHead = false;
-        direction = Direction.right;
-        Snake.clearSnake();
-        Snake.initializeSnake();
         Food.isNormalFood = true;
         Food.isFastFood = false;
         Food.isSteroidFood = false;
+
+        Snake.clearSnake();
+        Snake.initializeSnake();
+
+        Timer timer = new Timer();
+        timer.resetTimerToZero();
+        timer.startDisplayTimer();
+        Game.turnCanvasBack();
+        Food.addFood();
+        speed = 1;
+
     }
 
     public void initializeBoard() {
@@ -164,6 +173,7 @@ public class Game {
 
         // Paint Snake in Canvas
         graphicsContext.setFill(Color.DARKOLIVEGREEN);
+
         for (int i = 1; i < Snake.snake.size(); i++) {
             if (bigHead) {
                 graphicsContext.fillRect((Snake.snake.get(0).x-1) * squareSize, (Snake.snake.get(0).y-1) * squareSize, squareSize * 3, squareSize * 3);
@@ -195,6 +205,7 @@ public class Game {
     }
 
     public void incrementSnake() {
+
         Snake.snake.add(new Square(-1, -1));
         score++;
 

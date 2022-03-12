@@ -20,6 +20,11 @@ public class Timer {
     }
 
     public String getElapsedTime() {
-        return String.format("%.2f", (System.currentTimeMillis() - time) / 1000F);
+        if (time < 1) {
+            return "0";
+        }
+        else {
+            return String.format("%.0f", (System.currentTimeMillis() - time) / 1000F);
+        }
     }
 }

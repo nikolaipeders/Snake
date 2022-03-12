@@ -14,11 +14,7 @@ public class Input {
             if (key.getCode() == KeyCode.ENTER) {
                 snake.resetGame();
                 snake.tl.play();
-                Timer timer = new Timer();
-                timer.resetTimerToZero();
-                timer.startDisplayTimer();
-                Game.turnCanvasBack();
-                Food.addFood();
+
             }
 
             if (key.getCode() == KeyCode.UP) {
