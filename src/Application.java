@@ -32,15 +32,6 @@ public class Application extends javafx.application.Application {
         pressEnter.setStyle(stdFont);
         root.getChildren().add(pressEnter);
 
-        // If Insane
-        if (Game.insaneMode) {
-            Rotate rotate = new Rotate();
-            rotate.setPivotX(applicationScene.getHeight() / 2);
-            rotate.setPivotY(applicationScene.getWidth() / 2);
-            rotate.setAngle(90);
-            root.getTransforms().add(rotate);
-        }
-
         // Initialize Window
         game.initializeBoard();
         game.snakeAnimation();

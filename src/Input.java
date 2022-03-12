@@ -17,6 +17,7 @@ public class Input {
                 Timer timer = new Timer();
                 timer.resetTimerToZero();
                 timer.startDisplayTimer();
+                Game.turnCanvasBack();
                 Food.addFood();
             }
 
